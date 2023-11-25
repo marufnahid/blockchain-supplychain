@@ -1,0 +1,82 @@
+hr{
+    position: relative;
+    top: 20px;
+    border: none;   
+    height: 12px;
+    background: black;
+}
+.wait{
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.card-wrap {
+    height: 180px;
+    margin: auto;
+    justify-content: center;
+    margin: 0 70px;
+}
+
+.card-wrap img {
+        width: 80px;
+        height: 80px;
+        margin: auto;
+}
+
+.home-button {
+    width: 60%;
+    margin: 15px auto;
+}
+
+
+ #progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+#progressbar li {
+    list-style-type: none;
+    color: #99a2a8;
+    font-size: 9px;
+    width: calc(100%/6);
+    float: left;
+    position: relative;
+    font: 500 13px/1 'Roboto', sans-serif;
+    text-align: center;
+}
+#progressbar li:nth-child(2):before {
+    content: "\f12f";
+}
+ #progressbar li:nth-child(3):before {
+    content: "\f457";
+}
+#progressbar li:before {
+    content: "\f1fa";
+    font: normal normal normal 30px/50px Ionicons;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    background: #eaf0f4;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+}
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 10px;
+    background: #eaf0f4;
+    position: absolute;
+    left: -50%;
+    top: 21px;
+    z-index: -1;
+}
+ #progressbar li:last-child:after {
+    width: 150%;
+}
+ #progressbar li.active {
+    color: #5cb85c;
+}
+ #progressbar li.active:before, .multi_step_form #msform #progressbar li.active:after {
+    background: #5cb85c;
+    color: white;
+}
