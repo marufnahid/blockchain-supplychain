@@ -121,7 +121,7 @@ function Manufacturer() {
                     <div className="card p-4 my-4">
                         <div className='d-flex justify-content-between'>
                             <div>
-                                <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
+                                <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">Back</span>
                             </div>
                             <div className='d-flex align-items-center'>
                                 <b> Account: </b>

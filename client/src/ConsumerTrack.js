@@ -5,7 +5,7 @@ import Web3 from "web3";
 import SupplyChainABI from "./artifacts/SupplyChain.json"
 import MedicineInfo from "./MedicineInfo";
 
-function Track() {
+function ConsumerTrack() {
     const history = useHistory()
     const inputRef = useRef(null);
     useEffect(() => {
@@ -173,35 +173,37 @@ function Track() {
                         <div className='row'>
                             <div className='col-6'>
                                 <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
-
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
                             </div>
                             <div className='col-6'>
                                 <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+
+                            </div>
+                        </div>
+
+                        <div className='row'>
+                            <div className='col-12'>
                                 <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='card mt-4 p-4'>
-                    <div className='d-flex justify-content-between'>
-                        <div>
-                            <button onClick={() => {
-                                history.push('/')
-                            }} className="btn btn-outline-danger btn-md mx-4"> Home</button>
-                        </div>
-                        <div>
-                            <button onClick={() => {
-                                showTrackTillSold(false);
-                            }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
-                        </div>
-                    </div>
+                <div className='card mt-4  align-items-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            showTrackTillSold(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
 
+                    </div>
                 </div>
 
-                <div className='card mt-4'>
+                <div className='card mt-4 mb-5'>
                     <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Manufecturing Details</h3>
+                            </div>
+                        </div>
                         <div className='row'>
                             <div className='col-4'>
                                 <div className='card p-4'>
@@ -251,8 +253,11 @@ function Track() {
                             <div className='col-4'>
                                 <div className='card p-4 align-items-center'>
                                     <Qrcode value={QRCodeData} />
+                                    <div className='mt-1'>
+                                         <p>Scan QR to get manufecturing details</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -573,6 +578,8 @@ function Track() {
 
             const consumerID = await SupplyChain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
 
+
+
             SupplyChain.methods.getConsumer(consumerID[0]).call().then((consumer) => {
 
                 setSoldData({
@@ -668,54 +675,14 @@ function Track() {
 
     return (
         <div>
-            <div className='container mt-5'>
-                <div className="row">
+            <div className='container'>
+                <div className="row align-items-center vh-100">
                     <div className="col-sm-12">
-                        <div className="card p-4 my-4">
-                            <div className='d-flex justify-content-between'>
-                                <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
-                                </div>
-                                <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
-                                    <input
-                                        className='form-control'
-                                        type="text"
-                                        value={currentaccount}
-                                        readOnly
-                                        ref={inputRef}
-                                    />
-                                    <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
-                                </div>
-
+                        <div className='row'>
+                            <div className='col-md-6 offset-md-3'>
+                                <h3 className='text-center mb-3'>Track Medicine</h3>
                             </div>
                         </div>
-                        <table className="table table-sm table-bordered mt-4 text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Medicine ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Current Processing Stage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.keys(MED).map(function (key) {
-                                    return (
-                                        <tr key={key}>
-                                            <td>{MED[key].id}</td>
-                                            <td>{MED[key].name}</td>
-                                            <td>{MED[key].description}</td>
-                                            <td>
-                                                {
-                                                    MedStage[key]
-                                                }
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
                         <div className="row">
                             <div className="col-md-6 offset-md-3">
                                 <div className="card p-4 my-4">
@@ -750,4 +717,4 @@ function Track() {
     )
 }
 
-export default Track
+export default ConsumerTrack

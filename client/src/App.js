@@ -8,6 +8,7 @@ import RawMatSupplier from './RawMatSupplier'
 import Manufacturer from './Manufacturer'
 import Distributor from './Distributor'
 import Retailer from './Retailer'
+import ConsumerTrack from './ConsumerTrack'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/addmed" component={AddMed} />
           <Route path="/supply" component={Supply} />
           <Route path="/track" component={Track} />
+          <Route path="/consumer-track" component={ConsumerTrack} />
         </Switch>
       </Router>
     </div>
