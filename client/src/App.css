@@ -1,3 +1,4 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 hr{
     position: relative;
     top: 20px;
@@ -44,14 +45,26 @@ hr{
     text-align: center;
 }
 #progressbar li:nth-child(2):before {
-    content: "\f12f";
+    content: "\f722";
 }
  #progressbar li:nth-child(3):before {
-    content: "\f457";
+    content: "\f275";
 }
+ #progressbar li:nth-child(4):before {
+    content: "\e58d";
+}
+ #progressbar li:nth-child(5):before {
+    content: "\f54f";
+}
+#progressbar li:nth-child(6):before {
+    content: "\f007";
+}
+
 #progressbar li:before {
-    content: "\f1fa";
-    font: normal normal normal 30px/50px Ionicons;
+    content: "\f07a";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    /* font: normal normal normal 30px/50px Ionicons; */
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -60,6 +73,8 @@ hr{
     border-radius: 50%;
     margin: 0 auto 10px auto;
 }
+
+
 #progressbar li:after {
     content: '';
     width: 100%;
@@ -70,13 +85,14 @@ hr{
     top: 21px;
     z-index: -1;
 }
+
  #progressbar li:last-child:after {
     width: 150%;
 }
  #progressbar li.active {
     color: #5cb85c;
 }
- #progressbar li.active:before, .multi_step_form #msform #progressbar li.active:after {
+ #progressbar li.active:before,  #progressbar li.active:after {
     background: #5cb85c;
     color: white;
 }

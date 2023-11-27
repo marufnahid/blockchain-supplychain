@@ -184,13 +184,14 @@ function Supply() {
 
 
                         <h6><b>Supply Chain Flow:</b></h6>
-                        <ul id="progressbar">
+                        <ul id="progressbar" className='supply-progress'>
+                        
                             <li className="active">Order</li>
-                            <li>Raw Material Supplier</li>
-                            <li>Manufacturer</li>
-                            <li>Distributor</li>
-                            <li>Retailer</li>
-                            <li>Consumer</li>
+                            <li className="active">Raw Material Supplier</li>
+                            <li className="active">Manufacturer</li>
+                            <li className="active">Distributor</li>
+                            <li className="active">Retailer</li>
+                            <li className="active">Consumer</li>
                         </ul>
                         <table className="table table-stripped text-center table-bordered">
                             <thead>

@@ -23,12 +23,15 @@ function Track() {
     const [MAN, setMAN] = useState();
     const [DIS, setDIS] = useState();
     const [RET, setRET] = useState();
+    const [SoldData, setSoldData] = useState();
     const [TrackTillSold, showTrackTillSold] = useState(false);
     const [TrackTillRetail, showTrackTillRetail] = useState(false);
     const [TrackTillDistribution, showTrackTillDistribution] = useState(false);
     const [TrackTillManufacture, showTrackTillManufacture] = useState(false);
     const [TrackTillRMS, showTrackTillRMS] = useState(false);
     const [TrackTillOrdered, showTrackTillOrdered] = useState(false);
+
+    
 
     const loadWeb3 = async () => {
         if (window.ethereum) {
@@ -94,7 +97,14 @@ function Track() {
                 ret[i + 1] = await supplychain.methods.RET(i + 1).call();
             }
             setRET(ret);
-            
+
+            // const consumerData = await supplychain.methods.getConsumersByRetailer().call();
+            // setSoldData(consumerData);
+            // console.log(consumerData);
+
+            // const consumerID = await supplychain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
+            //console.log(RET[MED[ID].RETid].addr);
+
             setloader(false);
         }
         else {
@@ -110,239 +120,366 @@ function Track() {
     }
     if (TrackTillSold) {
         return (
-            <div className="container-xl">
-                <article className="col-4">
-                    <h3><b><u>Medicine:</u></b></h3>
-                    <span><b>Medicine ID: </b>{MED[ID].id}</span>
-                    <br />
-                    <span><b>Name:</b> {MED[ID].name}</span>
-                    <br />
-                    <span><b>Description: </b>{MED[ID].description}</span>
-                    <br />
-                    <span><b>Current stage: </b>{MedStage[ID]}</span>
-                </article>
-                <hr />
-                <br />
-                <section className="row">
+            <div className="container">
+                <div className='medicine-details mt-5 '>
+                    <div className='card p-4 m-auto'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Medicine Details</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Manufactured by:</u></h4>
-                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Distributed by:</u></h4>
-                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Retailed by:</u></h4>
-                        <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
-                        <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
-                        <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Sold</u></h4>
-                    </article>
-                </section>
-                <button onClick={() => {
-                    showTrackTillSold(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='card mt-4 jusitfy-content-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            history.push('/')
+                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
+                        <button onClick={() => {
+                            showTrackTillSold(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
+
+                    </div>
+                </div>
+
+                <div className='card mt-4'>
+                    <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+                                    <h4>Raw Materials Supplier:</h4>
+                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+                                    <h4>Manufactured by:</h4>
+                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+
+                                    <h4>Distributed by:</h4>
+                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row mt-4'>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+
+                                    <h4>Retailed by:</h4>
+                                    <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
+                                    <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
+                                    <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+
+                                    <h4>Sold by:</h4>
+                                    <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
+                                    <p><b>Customer Name:</b> {RET[MED[ID].RETid].name}</p>
+                                    <p><b>Customer Phone: </b>{RET[MED[ID].RETid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div >
         )
     }
     if (TrackTillRetail) {
         return (
-            <div className="container-xl">
-                <article className="col-4">
-                    <h3><b><u>Medicine:</u></b></h3>
-                    <span><b>Medicine ID: </b>{MED[ID].id}</span>
-                    <br />
-                    <span><b>Name:</b> {MED[ID].name}</span>
-                    <br />
-                    <span><b>Description: </b>{MED[ID].description}</span>
-                    <br />
-                    <span><b>Current stage: </b>{MedStage[ID]}</span>
-                </article>
-                <hr />
-                <br />
-                <section className="row">
+            <div className="container">
+                <div className='medicine-details mt-5 '>
+                    <div className='card p-4 m-auto'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Medicine Details</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Manufactured by:</u></h4>
-                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Distributed by:</u></h4>
-                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Retailed by:</u></h4>
-                        <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
-                        <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
-                        <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
-                    </article>
-                </section>
-                <button onClick={() => {
-                    showTrackTillRetail(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='card mt-4 jusitfy-content-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            history.push('/')
+                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
+                        <button onClick={() => {
+                            showTrackTillRetail(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
+
+                    </div>
+                </div>
+
+                <div className='card mt-4'>
+                    <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='card p-4'>
+                                    <h4>Raw Materials Supplier:</h4>
+                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='card p-4'>
+                                    <h4>Manufactured by:</h4>
+                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row mt-4'>
+                            <div className='col-6'>
+                                <div className='card p-4'>
+
+                                    <h4>Distributed by:</h4>
+                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                </div>
+                            </div>
+
+                            <div className='col-6'>
+                                <div className='card p-4'>
+
+                                    <h4>Retailed by:</h4>
+                                    <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
+                                    <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
+                                    <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div >
+
         )
     }
     if (TrackTillDistribution) {
         return (
-            <div className="container-xl">
-                <article className="col-4">
-                    <h3><b><u>Medicine:</u></b></h3>
-                    <span><b>Medicine ID: </b>{MED[ID].id}</span>
-                    <br />
-                    <span><b>Name:</b> {MED[ID].name}</span>
-                    <br />
-                    <span><b>Description: </b>{MED[ID].description}</span>
-                    <br />
-                    <span><b>Current stage: </b>{MedStage[ID]}</span>
-                </article>
-                <hr />
-                <br />
-                <section className="row">
+            <div className="container">
+                <div className='medicine-details mt-5 '>
+                    <div className='card p-4 m-auto'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Medicine Details</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Manufactured by:</u></h4>
-                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Distributed by:</u></h4>
-                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
-                    </article>
-                </section>
-                <button onClick={() => {
-                    showTrackTillDistribution(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='card mt-4 jusitfy-content-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            history.push('/')
+                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
+                        <button onClick={() => {
+                            showTrackTillDistribution(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
+
+                    </div>
+                </div>
+
+                <div className='card mt-4'>
+                    <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+                                    <h4>Raw Materials Supplier:</h4>
+                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+                                    <h4>Manufactured by:</h4>
+                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-4'>
+                                <div className='card p-4'>
+
+                                    <h4>Distributed by:</h4>
+                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div >
         )
     }
     if (TrackTillManufacture) {
         return (
-            <div className="container-xl">
-                <article className="col-4">
-                    <h3><b><u>Medicine:</u></b></h3>
-                    <span><b>Medicine ID: </b>{MED[ID].id}</span>
-                    <br />
-                    <span><b>Name:</b> {MED[ID].name}</span>
-                    <br />
-                    <span><b>Description: </b>{MED[ID].description}</span>
-                    <br />
-                    <span><b>Current stage: </b>{MedStage[ID]}</span>
-                </article>
-                <hr />
-                <br />
-                <section className="row">
+            <div className="container">
+                <div className='medicine-details mt-5 '>
+                    <div className='card p-4 m-auto'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Medicine Details</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                    <span>&#10132;</span>
-                    <article className="col-3">
-                        <h4><u>Manufactured by:</u></h4>
-                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                    </article>
-                </section>
-                <button onClick={() => {
-                    showTrackTillManufacture(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='card mt-4 jusitfy-content-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            history.push('/')
+                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
+                        <button onClick={() => {
+                            showTrackTillManufacture(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
+
+                    </div>
+                </div>
+
+                <div className='card mt-4'>
+                    <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='card p-4'>
+                                    <h4>Raw Materials Supplier:</h4>
+                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                </div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='card p-4'>
+                                    <h4>Manufactured by:</h4>
+                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div >
         )
     }
     if (TrackTillRMS) {
         return (
-            <div className="container-xl">
-                <article className="col-4">
-                    <h3><b><u>Medicine:</u></b></h3>
-                    <span><b>Medicine ID: </b>{MED[ID].id}</span>
-                    <br />
-                    <span><b>Name:</b> {MED[ID].name}</span>
-                    <br />
-                    <span><b>Description: </b>{MED[ID].description}</span>
-                    <br />
-                    <span><b>Current stage: </b>{MedStage[ID]}</span>
-                </article>
-                <hr />
-                <br />
-                <section className="row">
+            <div className="container">
+                <div className='medicine-details mt-5 '>
+                    <div className='card p-4 m-auto'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h3 className='text-center mb-3'>Medicine Details</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                </section>
-                <button onClick={() => {
-                    showTrackTillRMS(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
+                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='card mt-4 jusitfy-content-center'>
+                    <div className='card-body'>
+                        <button onClick={() => {
+                            history.push('/')
+                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
+                        <button onClick={() => {
+                            showTrackTillRMS(false);
+                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
+
+                    </div>
+                </div>
+
+                <div className='card mt-4'>
+                    <div className='card-body'>
+                        <div className='row'>
+                            <div className='col-md-6 offset-md-3'>
+                                <div className='card p-4'>
+                                    <h4>Raw Materials Supplier:</h4>
+                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div >
         )
     }
     if (TrackTillOrdered) {
         return (
             <div className="container mt-5">
+
                 <div className='card'>
                     <div className='d-flex justify-content-center px-3 top' >
                         <h3>Track Medicine</h3>
@@ -378,8 +515,9 @@ function Track() {
     const handlerSubmit = async (event) => {
         event.preventDefault();
         var ctr = await SupplyChain.methods.medicineCtr().call();
-        if (!((ID > 0) && (ID <= ctr)))
+        if (!((ID > 0) && (ID <= ctr))) {
             alert("Invalid Medicine ID!!!");
+        }
         else {
             // eslint-disable-next-line
             if (MED[ID].stage == 5)
@@ -462,15 +600,32 @@ function Track() {
                                 })}
                             </tbody>
                         </table>
-                        <div className="card p-4 my-4">
-                            <h6 className='text-center'>Enter Medicine ID to Track it</h6>
-                            <form onSubmit={handlerSubmit} className='text-center'>
-                                <div className='form-group'>
-                                    <input className="form-control-sm" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
-                                    <button className="btn btn-outline-success btn-sm" onSubmit={handlerSubmit}>Track</button>
+                        <div className="row">
+                            <div className="col-md-6 offset-md-3">
+                                <div className="card p-4 my-4">
+
+
+                                    <form onSubmit={handlerSubmit} className='m-auto'>
+                                        <div className='form-row align-items-center'>
+                                            <div className="col-auto my-1">
+                                                <h6 className='text-center'>Enter Medicine ID to Track it</h6>
+                                            </div>
+                                        </div>
+                                        <div className="form-row align-items-center">
+
+                                            <div className="col-auto my-1">
+                                                <label className="mr-sm-2" htmlFor="inlineFormInputName">Medicine ID</label>
+                                                <input type="text" className="form-control" id="inlineFormInputName" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                            </div>
+
+                                            <div className="col-auto my-1 align-self-end">
+                                                <button type="submit" className="btn btn-primary" onSubmit={handlerSubmit}>Track</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
 
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
