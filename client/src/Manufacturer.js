@@ -114,33 +114,33 @@ function Manufacturer() {
 
 
     return (
-        <div>
+        <div className='dark-mode-deep-bg vh-100'>
         <div className="container">
             <div className="row text-center">
                 <div className="col-12">
-                    <div className="card p-4 my-4">
+                    <div className="card p-4 my-4 dark-mode-light-bg">
                         <div className='d-flex justify-content-between'>
                             <div>
-                                <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">Back</span>
+                                <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">Back</span>
                             </div>
                             <div className='d-flex align-items-center'>
-                                <b> Account: </b>
+                                <b className='align-self-center dark-mode-text'> Account: </b>
                                 <input
-                                    className='form-control'
+                                    className='form-control mx-2'
                                     type="text"
                                     value={currentaccount}
                                     readOnly
                                     ref={inputRef}
                                 />
-                                 <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                 <button onClick={copyToClipboard} className='custom-btn dark-mode-btn btn-md'>Copy</button>
                             </div>
 
                         </div>
                     </div>
 
 
-                    <form onSubmit={handlerSubmitMAN} className='card p-4'>
-                        <h4 className='mb-4'>Manufactuerer</h4>
+                    <form onSubmit={handlerSubmitMAN} className='card p-4 dark-mode-light-bg'>
+                        <h4 className='mb-4 dark-mode-text'>Manufactuerer</h4>
                         <div className='row'>
                             <div className='col-md-6 form-group'>
                                 <input className="form-control" type="text" onChange={handlerChangeAddressMAN} placeholder="Ethereum Address" required />
@@ -158,14 +158,14 @@ function Manufacturer() {
                                 <input className="form-control" type="hidden" onChange={handlerChangeRoleMAN} value="manufacturer" required />
                             </div>
                             <div className='col-12'>
-                                <button className="btn btn-outline-success btn-md" onSubmit={handlerSubmitMAN}>Register</button>
+                                <button className="btn custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitMAN}>Register</button>
                             </div>
                         </div>
                     </form>
                     <div className="row mt-3">
                         <div className="col-12">
-                            <div className="card p-4">
-                                <table className="table table table-striped">
+                            <div className="card p-4 dark-mode-light-bg">
+                                <table className="table table table-striped dark-mode-text">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>

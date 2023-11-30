@@ -289,15 +289,6 @@ contract SupplyChain {
         return 0;
     }
 
-    //To sell medicines from retailer to consumer
-    // function sold(uint256 _medicineID) public {
-    //     require(_medicineID > 0 && _medicineID <= medicineCtr);
-    //     uint256 _id = findRET(msg.sender);
-    //     require(_id > 0);
-    //     require(_id == MedicineStock[_medicineID].RETid); //Only correct retailer can mark medicine as sold
-    //     require(MedicineStock[_medicineID].stage == STAGE.Retail);
-    //     MedicineStock[_medicineID].stage = STAGE.sold;
-    // }
 
     function sold(
         uint256 _medicineID,

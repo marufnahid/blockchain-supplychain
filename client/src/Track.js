@@ -139,10 +139,10 @@ function Track() {
             // setSoldData(consumerData);
             // console.log(consumerData);
 
-            if (ID) {
-                const consumerID = await supplychain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
-                setConsumerID(consumerID);
-            }
+            // if (ID) {
+            //     const consumerID = await supplychain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
+            //     setConsumerID(consumerID);
+            // }
 
             // const consumerID = await supplychain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
             //console.log(RET[MED[ID].RETid].addr);
@@ -162,398 +162,464 @@ function Track() {
     }
     if (TrackTillSold) {
         return (
-            <div className="container">
-                <div className='medicine-details mt-5 '>
-                    <div className='card p-4 m-auto'>
-                        <div className='row'>
-                            <div className='col-12'>
-                                <h3 className='text-center mb-3'>Medicine Details</h3>
+            <div className="dark-mode-deep-bg">
+                <div className="container pt-5">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillSold(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
-                            </div>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mt-4 p-4'>
-                    <div className='d-flex justify-content-between'>
-                        <div>
-                            <button onClick={() => {
-                                history.push('/')
-                            }} className="btn btn-outline-danger btn-md mx-4"> Home</button>
-                        </div>
-                        <div>
-                            <button onClick={() => {
-                                showTrackTillSold(false);
-                            }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
-                        </div>
                     </div>
 
-                </div>
+                    <div className='medicine-details pt-4 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-4 dark-mode-text'>Medicine Details</h3>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                <div className='card mt-4'>
-                    <div className='card-body'>
-                        <div className='row'>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-                                    <h4>Raw Materials Supplier:</h4>
-                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
                                 </div>
-                            </div>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-                                    <h4>Manufactured by:</h4>
-                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                                </div>
-                            </div>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-
-                                    <h4>Distributed by:</h4>
-                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='row mt-4'>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-
-                                    <h4>Retailed by:</h4>
-                                    <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
-                                    <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
-                                    <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
-                                </div>
-                            </div>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-
-                                    <h4>Sold by:</h4>
-                                    <p><b>Retailer Name: </b>{RET[MED[ID].RETid].name}</p>
-                                    <p><b>Customer Name:</b>{SoldData.name} </p>
-                                    <p><b>Customer Phone: </b>{SoldData.phone}</p>
-                                </div>
-                            </div>
-                            <div className='col-4'>
-                                <div className='card p-4 align-items-center'>
-                                    <Qrcode value={QRCodeData} />
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+
+                    <div className='card mt-4 dark-mode-light-bg'>
+                        <div className='card-body'>
+                            <div className='row'>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Raw Materials Supplier:</h4>
+                                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Manufactured by:</h4>
+                                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Distributed by:</h4>
+                                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='row mt-4'>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Retailed by:</h4>
+                                        <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
+                                        <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
+                                        <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Sold by:</h4>
+                                        <p><b>Retailer Name: </b>{RET[MED[ID].RETid].name}</p>
+                                        <p><b>Customer Name:</b>{SoldData.name} </p>
+                                        <p><b>Customer Phone: </b>{SoldData.phone}</p>
+                                    </div>
+                                </div>
+                                <div className='col-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg align-items-center'>
+                                        <div className='qr-wraper'>
+                                            <Qrcode value={`Medicine Details=>\nMedicine ID:${MED[ID].id}\nStage:${MedStage[ID]}\nMedicine Name:${MED[ID].name}\nDescription:${MED[ID].description}\n\nRaw Materils Supplied By=>\nID:${RMS[MED[ID].RMSid].id}\nName: ${RMS[MED[ID].RMSid].name}\n\nManufectured  By=>\nID:${MAN[MED[ID].MANid].id}\nName: ${MAN[MED[ID].MANid].name}\n\nDistributed By=>\nID:${DIS[MED[ID].DISid].id}\nName: ${DIS[MED[ID].DISid].name}\nLocation: ${DIS[MED[ID].DISid].place}\nPhone: ${DIS[MED[ID].DISid].phone}\n\nRetail By=>\nID:${RET[MED[ID].RETid].id}\nName: ${RET[MED[ID].RETid].name}\nLocation: ${RET[MED[ID].RETid].place}\nPhone: ${RET[MED[ID].RETid].phone}
+                                    \n\nSold By=>\nConsumer Name: ${SoldData.name}\nConsumer Phone: ${SoldData.phone}`} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div >
         )
     }
     if (TrackTillRetail) {
         return (
-            <div className="container">
-                <div className='medicine-details mt-5 '>
-                    <div className='card p-4 m-auto'>
-                        <div className='row'>
-                            <div className='col-12'>
-                                <h3 className='text-center mb-3'>Medicine Details</h3>
+            <div className="dark-mode-deep-bg pb-5">
+                <div className="container">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillRetail(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
-
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
-                            </div>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mt-4 jusitfy-content-center'>
-                    <div className='card-body'>
-                        <button onClick={() => {
-                            history.push('/')
-                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
-                        <button onClick={() => {
-                            showTrackTillRetail(false);
-                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
 
                     </div>
-                </div>
 
-                <div className='card mt-4'>
-                    <div className='card-body'>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='card p-4'>
-                                    <h4>Raw Materials Supplier:</h4>
-                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                    <div className='medicine-details pt-4 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-4 dark-mode-text'>Medicine Details</h3>
                                 </div>
                             </div>
-                            <div className='col-6'>
-                                <div className='card p-4'>
-                                    <h4>Manufactured by:</h4>
-                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
+
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='row mt-4'>
-                            <div className='col-6'>
-                                <div className='card p-4'>
-
-                                    <h4>Distributed by:</h4>
-                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
-                                </div>
-                            </div>
-
-                            <div className='col-6'>
-                                <div className='card p-4'>
-
-                                    <h4>Retailed by:</h4>
-                                    <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
-                                    <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
-                                    <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div className='card mt-4 dark-mode-light-bg '>
+                        <div className='card-body'>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Raw Materials Supplier:</h4>
+                                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Manufactured by:</h4>
+                                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='row mt-4'>
+                                <div className='col-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Distributed by:</h4>
+                                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                    </div>
+                                </div>
+
+                                <div className='col-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Retailed by:</h4>
+                                        <p><b>Retailer ID: </b>{RET[MED[ID].RETid].id}</p>
+                                        <p><b>Name:</b> {RET[MED[ID].RETid].name}</p>
+                                        <p><b>Place: </b>{RET[MED[ID].RETid].place}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div >
 
         )
     }
     if (TrackTillDistribution) {
         return (
-            <div className="container">
-                <div className='medicine-details mt-5 '>
-                    <div className='card p-4 m-auto'>
-                        <div className='row'>
-                            <div className='col-12'>
-                                <h3 className='text-center mb-3'>Medicine Details</h3>
+            <div className="dark-mode-deep-bg">
+                <div className="container pt-5 pb-5">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillDistribution(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
-
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
-                            </div>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mt-4 jusitfy-content-center'>
-                    <div className='card-body'>
-                        <button onClick={() => {
-                            history.push('/')
-                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
-                        <button onClick={() => {
-                            showTrackTillDistribution(false);
-                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
 
                     </div>
-                </div>
 
-                <div className='card mt-4'>
-                    <div className='card-body'>
-                        <div className='row'>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-                                    <h4>Raw Materials Supplier:</h4>
-                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                    <div className='medicine-details pt-4 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-4 dark-mode-text'>Medicine Details</h3>
                                 </div>
                             </div>
-                            <div className='col-4'>
-                                <div className='card p-4'>
-                                    <h4>Manufactured by:</h4>
-                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
-                                </div>
-                            </div>
-                            <div className='col-4'>
-                                <div className='card p-4'>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                                    <h4>Distributed by:</h4>
-                                    <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
-                                    <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
-                                    <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
+                                </div>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div className='card mt-4 dark-mode-light-bg '>
+                        <div className='card-body'>
+                            <div className='row'>
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Raw Materials Supplier:</h4>
+                                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Manufactured by:</h4>
+                                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='row mt-4' >
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+
+                                        <h4>Distributed by:</h4>
+                                        <p><b>Distributor ID: </b>{DIS[MED[ID].DISid].id}</p>
+                                        <p><b>Name:</b> {DIS[MED[ID].DISid].name}</p>
+                                        <p><b>Place: </b>{DIS[MED[ID].DISid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg align-items-center'>
+                                        <div className='qr-wraper'>
+                                            <Qrcode value={`Medicine Details=>\nMedicine ID:${MED[ID].id}\nStage:${MedStage[ID]}\nMedicine Name:${MED[ID].name}\nDescription:${MED[ID].description}\n\nRaw Materials Supplied By=>\nID:${RMS[MED[ID].RMSid].id}\nName: ${RMS[MED[ID].RMSid].name}\nLocation: ${RMS[MED[ID].RMSid].place}\nPhone: ${RMS[MED[ID].RMSid].phone}\n\nManufectured  By=>\nID:${MAN[MED[ID].MANid].id}\nName: ${MAN[MED[ID].MANid].name}\nLocation: ${MAN[MED[ID].MANid].place}\nPhone: ${MAN[MED[ID].MANid].phone}\n\nDistributed By=>\nID:${DIS[MED[ID].DISid].id}\nName: ${DIS[MED[ID].DISid].name}\nLocation: ${DIS[MED[ID].DISid].place}\nPhone: ${DIS[MED[ID].DISid].phone}`} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div >
         )
     }
     if (TrackTillManufacture) {
         return (
-            <div className="container">
-                <div className='medicine-details mt-5 '>
-                    <div className='card p-4 m-auto'>
-                        <div className='row'>
-                            <div className='col-12'>
-                                <h3 className='text-center mb-3'>Medicine Details</h3>
+            <div className="dark-mode-deep-bg vh-100">
+                <div className="container pt-5">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillManufacture(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
-
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
-                            </div>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mt-4 jusitfy-content-center'>
-                    <div className='card-body'>
-                        <button onClick={() => {
-                            history.push('/')
-                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
-                        <button onClick={() => {
-                            showTrackTillManufacture(false);
-                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
 
                     </div>
-                </div>
 
-                <div className='card mt-4'>
-                    <div className='card-body'>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='card p-4'>
-                                    <h4>Raw Materials Supplier:</h4>
-                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                    <div className='medicine-details pt-4 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-4 dark-mode-text'>Medicine Details</h3>
                                 </div>
                             </div>
-                            <div className='col-6'>
-                                <div className='card p-4'>
-                                    <h4>Manufactured by:</h4>
-                                    <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
-                                    <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
-                                    <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
+
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
+                                </div>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div className='card mt-4 dark-mode-light-bg'>
+                        <div className='card-body'>
+                            <div className='row'>
+                                <div className='col-md-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Raw Materials Supplier:</h4>
+                                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Manufactured by:</h4>
+                                        <p><b>Manufacturer ID: </b>{MAN[MED[ID].MANid].id}</p>
+                                        <p><b>Name:</b> {MAN[MED[ID].MANid].name}</p>
+                                        <p><b>Place: </b>{MAN[MED[ID].MANid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-4'>
+                                    <div className='card p-4 dark-mode-lighter-bg align-items-center'>
+                                        <div className='qr-wraper'>
+                                            <Qrcode value={`Medicine Details=>\nMedicine ID:${MED[ID].id}\nStage:${MedStage[ID]}\nMedicine Name:${MED[ID].name}\nDescription:${MED[ID].description}\n\nRaw Materials Supplied By=>\nID:${RMS[MED[ID].RMSid].id}\nName: ${RMS[MED[ID].RMSid].name}\nLocation: ${RMS[MED[ID].RMSid].place}\nPhone: ${RMS[MED[ID].RMSid].phone}\n\nManufectured = By=>\nID:${MAN[MED[ID].MANid].id}\nName: ${MAN[MED[ID].MANid].name}\nLocation: ${MAN[MED[ID].MANid].place}\nPhone: ${MAN[MED[ID].MANid].phone}`} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div >
         )
     }
     if (TrackTillRMS) {
         return (
-            <div className="container">
-                <div className='medicine-details mt-5 '>
-                    <div className='card p-4 m-auto'>
-                        <div className='row'>
-                            <div className='col-12'>
-                                <h3 className='text-center mb-3'>Medicine Details</h3>
+            <div className='dark-mode-deep-bg vh-100'>
+                <div className="container pt-5">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillRMS(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Medicine ID: </b>{MED[ID].id}</div>
-
-                                <div className='mb-2 border border-success p-3 rounded'><b>Current stage: </b>{MedStage[ID]}</div>
-                            </div>
-                            <div className='col-6'>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Name:</b> {MED[ID].name}</div>
-                                <div className='mb-2 border border-success p-3 rounded'><b>Description: </b>{MED[ID].description}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mt-4 jusitfy-content-center'>
-                    <div className='card-body'>
-                        <button onClick={() => {
-                            history.push('/')
-                        }} className="btn btn-outline-danger btn-md mx-4"> HOME</button>
-                        <button onClick={() => {
-                            showTrackTillRMS(false);
-                        }} className="btn btn-outline-success btn-md mx-4">Track Another Item</button>
 
                     </div>
-                </div>
 
-                <div className='card mt-4'>
-                    <div className='card-body'>
-                        <div className='row'>
-                            <div className='col-md-6 offset-md-3'>
-                                <div className='card p-4'>
-                                    <h4>Raw Materials Supplier:</h4>
-                                    <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                                    <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                                    <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                    <div className='medicine-details pt-4 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-4 dark-mode-text'>Medicine Details</h3>
                                 </div>
                             </div>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
 
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
+                                </div>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div >
+
+                    <div className='card mt-4 dark-mode-light-bg'>
+                        <div className='card-body'>
+                            <div className='row'>
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg dark-mode-text'>
+                                        <h4>Raw Materials Supplier:</h4>
+                                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
+                                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
+                                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-6'>
+                                    <div className='card p-4 dark-mode-lighter-bg align-items-center'>
+                                        <div className='qr-wraper'>
+                                            <Qrcode value={`Medicine Details=>\nMedicine ID:${MED[ID].id}\nStage:${MedStage[ID]}\nMedicine Name:${MED[ID].name}\nDescription:${MED[ID].description}\n\nRaw Materials Supplied By=>\nID:${RMS[MED[ID].RMSid].id}\nName: ${RMS[MED[ID].RMSid].name}\nLocation: ${RMS[MED[ID].RMSid].place}\nPhone: ${RMS[MED[ID].RMSid].phone}`} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
+            </div>
         )
     }
     if (TrackTillOrdered) {
         return (
-            <div className="container mt-5">
+            <div className='dark-mode-deep-bg vh-100 '>
+                <div className="container pt-5">
+                    <div className='card pt-4 p-4 dark-mode-light-bg'>
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <button onClick={() => {
+                                    history.push('/')
+                                }} className="custom-btn dark-mode-btn btn-md mx-4"> Home</button>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    showTrackTillOrdered(false);
+                                }} className="custom-btn dark-mode-btn btn-md mx-4">Track Another Item</button>
+                            </div>
+                        </div>
 
-                <div className='card'>
-                    <div className='d-flex justify-content-center px-3 top' >
-                        <h3>Track Medicine</h3>
                     </div>
-                </div>
-                <MedicineInfo medicine={MED[ID]} />
+                    <div className='medicine-details pt-5 '>
+                        <div className='card p-4 m-auto dark-mode-light-bg'>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h3 className='text-center mb-3 dark-mode-text'>Medicine Details</h3>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Medicine ID: </b>{MED[ID].id}</div>
 
-                <button onClick={() => {
-                    showTrackTillOrdered(false);
-                }} className="btn btn-outline-success btn-sm">Track Another Item</button>
-                <span onClick={() => {
-                    history.push('/')
-                }} className="btn btn-outline-danger btn-sm"> HOME</span>
-
-                {/* <section className="row">
-                    
-                    <article className="col-3">
-                        <h4><u>Raw Materials Supplied by:</u></h4>
-                        <p><b>Supplier ID: </b>{RMS[MED[ID].RMSid].id}</p>
-                        <p><b>Name:</b> {RMS[MED[ID].RMSid].name}</p>
-                        <p><b>Place: </b>{RMS[MED[ID].RMSid].place}</p>
-                    </article>
-                </section> */}
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Current stage: </b>{MedStage[ID]}</div>
+                                </div>
+                                <div className='col-6'>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Name:</b> {MED[ID].name}</div>
+                                    <div className='mb-2  p-3 rounded dark-mode-text border'><b>Description: </b>{MED[ID].description}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div >
         )
     }
@@ -571,72 +637,40 @@ function Track() {
         }
         else {
 
-            const consumerID = await SupplyChain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
 
-            SupplyChain.methods.getConsumer(consumerID[0]).call().then((consumer) => {
-
-                setSoldData({
-                    name: consumer.consumerName,
-                    phone: consumer.consumerPhone
-                })
-
-                // const consu = {
-                //     consumerName: consumer.consumerName,
-                //     consumerPhone: consumer.consumerPhone,
-                //     medicineID: MED[ID].id,
-                //     medicineName: MED[ID].name,
-                //     medicineDescription: MED[ID].description,
-                //     supplierID: RMS[MED[ID].RMSid].id,
-                //     supplierName: RMS[MED[ID].RMSid].name,
-                //     distributorID: DIS[MED[ID].DISid].id,
-                //     distributorName: DIS[MED[ID].DISid].name,
-                //     retailerID: RET[MED[ID].RETid].id,
-                //     retailerName: RET[MED[ID].RETid].name,
-                // };
-
-                // const res =
-
-                const data = {
-                    consumerName: consumer.consumerName,
-                    consumerPhone: consumer.consumerPhone,
-                    medicineID: MED[ID].id,
-                    medicineName: MED[ID].name,
-                    medicineDescription: MED[ID].description,
-                    supplierID: RMS[MED[ID].RMSid].id,
-                    supplierName: RMS[MED[ID].RMSid].name,
-                    distributorID: DIS[MED[ID].DISid].id,
-                    distributorName: DIS[MED[ID].DISid].name,
-                    retailerID: RET[MED[ID].RETid].id,
-                    retailerName: RET[MED[ID].RETid].name,
-                };
-
-                // Convert the object to a JSON string
-                const jsonString = JSON.stringify(data);
-
-                // Set the JSON string to the state
-                setQRCodeData(jsonString);
-
-                // setQRCodeData({
-                //     consumerName: consumer.consumerName,
-                //     consumerPhone: consumer.consumerPhone,
-                //     medicineID: MED[ID].id,
-                //     medicineName: MED[ID].name,
-                //     medicineDescription: MED[ID].description,
-                //     supplierID: RMS[MED[ID].RMSid].id,
-                //     supplierName: RMS[MED[ID].RMSid].name,
-                //     distributorID: DIS[MED[ID].DISid].id,
-                //     distributorName: DIS[MED[ID].DISid].name,
-                //     retailerID: RET[MED[ID].RETid].id,
-                //     retailerName: RET[MED[ID].RETid].name,
-                // })
-            }
-            )
 
             // console.log(SoldData);
 
             // eslint-disable-next-line
-            if (MED[ID].stage == 5)
+            if (MED[ID].stage == 5) {
+                const consumerID = await SupplyChain.methods.getConsumersByRetailer(RET[MED[ID].RETid].addr).call();
+
+                SupplyChain.methods.getConsumer(consumerID[0]).call().then((consumer) => {
+
+                    setSoldData({
+                        name: consumer.consumerName,
+                        phone: consumer.consumerPhone
+                    })
+
+                    const data = {
+                        consumerName: consumer.consumerName,
+                        consumerPhone: consumer.consumerPhone,
+                        medicineID: MED[ID].id,
+                        medicineName: MED[ID].name,
+                        medicineDescription: MED[ID].description,
+                        supplierID: RMS[MED[ID].RMSid].id,
+                        supplierName: RMS[MED[ID].RMSid].name,
+                        distributorID: DIS[MED[ID].DISid].id,
+                        distributorName: DIS[MED[ID].DISid].name,
+                        retailerID: RET[MED[ID].RETid].id,
+                        retailerName: RET[MED[ID].RETid].name,
+                    };
+                    const jsonString = JSON.stringify(data);
+                    setQRCodeData(jsonString);
+                }
+                )
                 showTrackTillSold(true);
+            }
             // eslint-disable-next-line
             else if (MED[ID].stage == 4)
                 showTrackTillRetail(true);
@@ -667,75 +701,49 @@ function Track() {
     };
 
     return (
-        <div>
-            <div className='container mt-5'>
+        <div className='dark-mode-deep-bg'>
+            <div className='container pt-5'>
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="card p-4 my-4">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
+                                    <span onClick={redirect_to_back} className="dark-mode-btn custom-btn btn-md">HOME</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
+                                    <b className='align-self-center dark-mode-text'> Account: </b>
                                     <input
-                                        className='form-control'
+                                        className='form-control mx-2'
                                         type="text"
                                         value={currentaccount}
                                         readOnly
                                         ref={inputRef}
                                     />
-                                    <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                    <button onClick={copyToClipboard} className='dark-mode-btn custom-btn btn-md'>Copy</button>
                                 </div>
 
                             </div>
                         </div>
-                        <table className="table table-sm table-bordered mt-4 text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Medicine ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Current Processing Stage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.keys(MED).map(function (key) {
-                                    return (
-                                        <tr key={key}>
-                                            <td>{MED[key].id}</td>
-                                            <td>{MED[key].name}</td>
-                                            <td>{MED[key].description}</td>
-                                            <td>
-                                                {
-                                                    MedStage[key]
-                                                }
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
                         <div className="row">
                             <div className="col-md-6 offset-md-3">
-                                <div className="card p-4 my-4">
+                                <div className="card p-4 my-4 dark-mode-light-bg">
 
 
                                     <form onSubmit={handlerSubmit} className='m-auto'>
                                         <div className='form-row align-items-center'>
                                             <div className="col-auto my-1">
-                                                <h6 className='text-center'>Enter Medicine ID to Track it</h6>
+                                                <h6 className='text-center dark-mode-text'>Enter Medicine ID to Track it</h6>
                                             </div>
                                         </div>
                                         <div className="form-row align-items-center">
 
                                             <div className="col-auto my-1">
-                                                <label className="mr-sm-2" htmlFor="inlineFormInputName">Medicine ID</label>
+                                                <label className="mr-sm-2 dark-mode-text" htmlFor="inlineFormInputName">Medicine ID</label>
                                                 <input type="text" className="form-control" id="inlineFormInputName" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
                                             </div>
 
                                             <div className="col-auto my-1 align-self-end">
-                                                <button type="submit" className="btn btn-primary" onSubmit={handlerSubmit}>Track</button>
+                                                <button type="submit" className="custom-btn dark-mode-btn" onSubmit={handlerSubmit}>Track</button>
                                             </div>
                                         </div>
                                     </form>
@@ -743,6 +751,35 @@ function Track() {
 
                             </div>
                         </div>
+                        <div className='card p-4 my-4 dark-mode-light-bg'>
+                            <table className="table table-md dark-mode-text table-stripped mt-4 text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Medicine ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Current Processing Stage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(MED).map(function (key) {
+                                        return (
+                                            <tr key={key}>
+                                                <td>{MED[key].id}</td>
+                                                <td>{MED[key].name}</td>
+                                                <td>{MED[key].description}</td>
+                                                <td>
+                                                    {
+                                                        MedStage[key]
+                                                    }
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

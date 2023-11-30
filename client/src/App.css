@@ -1,98 +1,156 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-hr{
-    position: relative;
-    top: 20px;
-    border: none;   
-    height: 12px;
-    background: black;
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+hr {
+  position: relative;
+  top: 20px;
+  border: none;
+  height: 12px;
+  background: black;
 }
-.wait{
-    text-align: center;
-    margin-top: 5rem;
+.wait {
+  text-align: center;
+  margin-top: 5rem;
 }
 
 .card-wrap {
-    height: 180px;
-    margin: auto;
-    justify-content: center;
-    margin: 0 70px;
+  height: 180px;
+  margin: auto;
+  justify-content: center;
+  margin: 0 70px;
 }
 
 .card-wrap img {
-        width: 80px;
-        height: 80px;
-        margin: auto;
+  width: 80px;
+  height: 80px;
+  margin: auto;
 }
 
 .home-button {
-    width: 60%;
-    margin: 15px auto;
+  width: 60%;
+  margin: 15px auto;
+  background-color: rgba(0, 0, 255, 0.171) !important;
 }
 
-
- #progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
 }
 #progressbar li {
-    list-style-type: none;
-    color: #99a2a8;
-    font-size: 9px;
-    width: calc(100%/6);
-    float: left;
-    position: relative;
-    font: 500 13px/1 'Roboto', sans-serif;
-    text-align: center;
+  list-style-type: none;
+  color: #99a2a8;
+  font-size: 9px;
+  width: calc(100% / 6);
+  float: left;
+  position: relative;
+  font: 500 13px/1 "Roboto", sans-serif;
+  text-align: center;
 }
 #progressbar li:nth-child(2):before {
-    content: "\f722";
+  content: "\f722";
 }
- #progressbar li:nth-child(3):before {
-    content: "\f275";
+#progressbar li:nth-child(3):before {
+  content: "\f275";
 }
- #progressbar li:nth-child(4):before {
-    content: "\e58d";
+#progressbar li:nth-child(4):before {
+  content: "\e58d";
 }
- #progressbar li:nth-child(5):before {
-    content: "\f54f";
+#progressbar li:nth-child(5):before {
+  content: "\f54f";
 }
 #progressbar li:nth-child(6):before {
-    content: "\f007";
+  content: "\f007";
 }
 
 #progressbar li:before {
-    content: "\f07a";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    /* font: normal normal normal 30px/50px Ionicons; */
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    display: block;
-    background: #eaf0f4;
-    border-radius: 50%;
-    margin: 0 auto 10px auto;
+  content: "\f07a";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  /* font: normal normal normal 30px/50px Ionicons; */
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  background: #eaf0f4;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
 }
 
-
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 10px;
-    background: #eaf0f4;
-    position: absolute;
-    left: -50%;
-    top: 21px;
-    z-index: -1;
+#progressbar li::after {
+  content: "";
+  width: 100%;
+  height: 10px;
+  background: #5cb85c !important;
+  position: absolute;
+  left: -50%;
+  top: 21px;
+  z-index: -1;
 }
 
- #progressbar li:last-child:after {
-    width: 150%;
+#progressbar li:last-child:after {
+  width: 150%;
 }
- #progressbar li.active {
-    color: #5cb85c;
+#progressbar li.active {
+  color: #5cb85c !important;
 }
- #progressbar li.active:before,  #progressbar li.active:after {
-    background: #5cb85c;
-    color: white;
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #5cb85c !important;
+  color: white;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+
+.home-page .card {
+  background-color: #111c44;
+  border: 1px solid #111c44;
+}
+
+.dark-mode-deep-bg {
+  background-color: #051139 !important;
+}
+.dark-mode-light-bg {
+  background-color: #111c44 !important;
+}
+.dark-mode-lighter-bg {
+  background-color: #3750aa0c !important;
+}
+.dark-mode-text {
+  color: white !important;
+}
+
+.custom-btn {
+  display: block;
+  padding: 7px;
+  border: none;
+  border-radius: 8px;
+  background: #5066e3 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+}
+
+.dark-mode-btn {
+  background-color: #5e72e4;
+  color: white;
+ 
+}
+
+.dark-mode-btn:hover {
+  background-color: #344767 !important;
+  color: white;
+}
+
+.table thead tr {
+    border-top: none;
+}
+
+.qr-wraper {
+  padding: 10px;
+  background: #fff;
 }

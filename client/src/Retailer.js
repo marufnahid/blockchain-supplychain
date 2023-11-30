@@ -28,7 +28,7 @@ function Retailer() {
         inputRef.current.select();
         document.execCommand('copy');
         alert('Address copied to clipboard!');
-      };
+    };
 
     const loadWeb3 = async () => {
         if (window.ethereum) {
@@ -61,7 +61,7 @@ function Retailer() {
                 ret[i] = await supplychain.methods.RET(i + 1).call();
             }
             setRET(ret);
-            
+
             setloader(false);
         }
         else {
@@ -93,7 +93,7 @@ function Retailer() {
     const handlerChangePhoneRET = (event) => {
         setRETphone(event.target.value);
     }
-    
+
     const handlerChangeRoleRET = (event) => {
         setRETrole(event.target.value);
     }
@@ -111,96 +111,96 @@ function Retailer() {
             alert("An error occured!!!")
         }
     }
-  
+
 
 
 
     return (
-        <div>
-        <div className="container">
-            <div className="row text-center">
-                <div className="col-12">
-                    <div className="card p-4 my-4">
-                        <div className='d-flex justify-content-between'>
-                            <div>
-                                <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">Back</span>
-                            </div>
-                            <div className='d-flex align-items-center'>
-                                <b> Account: </b>
-                                <input
-                                    className='form-control'
-                                    type="text"
-                                    value={currentaccount}
-                                    readOnly
-                                    ref={inputRef}
-                                />
-                                 <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
-                            </div>
+        <div className='dark-mode-deep-bg vh-100'>
+            <div className="container">
+                <div className="row text-center">
+                    <div className="col-12">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
+                            <div className='d-flex justify-content-between'>
+                                <div>
+                                    <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">Back</span>
+                                </div>
+                                <div className='d-flex align-items-center'>
+                                    <b className='align-self-center dark-mode-text'> Account: </b>
+                                    <input
+                                        className='form-control mx-2'
+                                        type="text"
+                                        value={currentaccount}
+                                        readOnly
+                                        ref={inputRef}
+                                    />
+                                    <button onClick={copyToClipboard} className='custom-btn dark-mode-btn'>Copy</button>
+                                </div>
 
-                        </div>
-                    </div>
-
-
-                    <form onSubmit={handlerSubmitRET} className='card p-4'>
-                        <h4 className='mb-4'>Retailer</h4>
-                        <div className='row'>
-                            <div className='col-md-6 form-group'>
-                                <input className="form-control" type="text" onChange={handlerChangeAddressRET} placeholder="Ethereum Address" required />
-                            </div>
-                            <div className='col-md-6 form-group'>
-                                <input className="form-control" type="text" onChange={handlerChangeNameRET} placeholder="Name" required />
-                            </div>
-                            <div className='col-md-6 form-group'>
-                                <input className="form-control" type="text" onChange={handlerChangePlaceRET} placeholder="Location" required />
-                            </div>
-                            <div className='col-md-6 form-group'>
-                                <input className="form-control" type="text" onChange={handlerChangePhoneRET} placeholder="Phone" required />
-                            </div>
-                             <div className='col-md-6 form-group'>
-                                <input className="form-control" type="hidden" onChange={handlerChangeRoleRET} value="retailer" required />
-                            </div>
-                            
-                            <div className='col-12'>
-                                <button className="btn btn-outline-success btn-md" onSubmit={handlerSubmitRET}>Register</button>
                             </div>
                         </div>
-                    </form>
-                    <div className="row mt-3">
-                        <div className="col-12">
-                            <div className="card p-4">
-                                <table className="table table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Place</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Role</th>
-                                            <th scope="col">Ethereum Address</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {Object.keys(RET).map(function (key) {
-                                            return (
-                                                <tr key={key}>
-                                                    <td>{RET[key].id}</td>
-                                                    <td>{RET[key].name}</td>
-                                                    <td>{RET[key].place}</td>
-                                                    <td>{RET[key].phone}</td>
-                                                    <td>{RET[key].role}</td>
-                                                    <td>{RET[key].addr}</td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
-                                </table>
+
+
+                        <form onSubmit={handlerSubmitRET} className='card p-4 dark-mode-light-bg'>
+                            <h4 className='mb-4 dark-mode-text'>Retailer</h4>
+                            <div className='row'>
+                                <div className='col-md-6 form-group'>
+                                    <input className="form-control" type="text" onChange={handlerChangeAddressRET} placeholder="Ethereum Address" required />
+                                </div>
+                                <div className='col-md-6 form-group'>
+                                    <input className="form-control" type="text" onChange={handlerChangeNameRET} placeholder="Name" required />
+                                </div>
+                                <div className='col-md-6 form-group'>
+                                    <input className="form-control" type="text" onChange={handlerChangePlaceRET} placeholder="Location" required />
+                                </div>
+                                <div className='col-md-6 form-group'>
+                                    <input className="form-control" type="text" onChange={handlerChangePhoneRET} placeholder="Phone" required />
+                                </div>
+                                <div className='col-md-6 form-group'>
+                                    <input className="form-control" type="hidden" onChange={handlerChangeRoleRET} value="retailer" required />
+                                </div>
+
+                                <div className='col-12'>
+                                    <button className="custom-btn btn dark-mode-btn btn-md" onSubmit={handlerSubmitRET}>Register</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div className="row mt-3">
+                            <div className="col-12">
+                                <div className="card p-4 dark-mode-light-bg">
+                                    <table className="table table table-striped dark-mode-text">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Place</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Role</th>
+                                                <th scope="col">Ethereum Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Object.keys(RET).map(function (key) {
+                                                return (
+                                                    <tr key={key}>
+                                                        <td>{RET[key].id}</td>
+                                                        <td>{RET[key].name}</td>
+                                                        <td>{RET[key].place}</td>
+                                                        <td>{RET[key].phone}</td>
+                                                        <td>{RET[key].role}</td>
+                                                        <td>{RET[key].addr}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 

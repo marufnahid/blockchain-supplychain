@@ -157,167 +157,189 @@ function Supply() {
             alert("An error occured!!!")
         }
     }
+
+    const isRoleDefined = ROLE && ROLE[3] !== undefined && ROLE[3] !== null && ROLE[3] !== "";
+
     return (
-        <div>
-            <div className='container mt-5 '>
+        <div className='dark-mode-deep-bg '>
+            <div className='container pt-5 '>
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="card p-4 my-4">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
+                                    <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">HOME</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
+                                    <b className='align-self-center dark-mode-text'> Account: </b>
                                     <input
-                                        className='form-control'
+                                        className='form-control mx-2'
                                         type="text"
                                         value={currentaccount}
                                         readOnly
                                         ref={inputRef}
                                     />
-                                    <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                    <button onClick={copyToClipboard} className='custom-btn dark-mode-btn btn-md'>Copy</button>
                                 </div>
 
                             </div>
                         </div>
 
+                        <div className='card p-4 my-4 dark-mode-light-bg'>
+                            <h6 className='dark-mode-text mb-4'><b>Supply Chain Flow:</b></h6>
+                            <ul id="progressbar" className='supply-progress'>
+                                <li className="active">Order</li>
+                                <li className="active">Raw Material Supplier</li>
+                                <li className="active">Manufacturer</li>
+                                <li className="active">Distributor</li>
+                                <li className="active">Retailer</li>
+                                <li className="active">Consumer</li>
+                            </ul>
+                        </div>
+                        <div className='row'>
+                            <div className={`col-${isRoleDefined ? 'md-8' : '12'}`}>
+                                <div className='card p-4 my-4 dark-mode-light-bg'>
+                                    <h4 className='dark-mode-text mb-4 text-center'><b>Medicine On Queue</b></h4>
+                                    <table className="table table-stripped text-center dark-mode-text">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Medicine ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Current Processing Stage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Object.keys(MED).map(function (key) {
+                                                return (
+                                                    <tr key={key}>
+                                                        <td>{MED[key].id}</td>
+                                                        <td>{MED[key].name}</td>
+                                                        <td>{MED[key].description}</td>
+                                                        <td>
+                                                            {
+                                                                MedStage[key]
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        <h6><b>Supply Chain Flow:</b></h6>
-                        <ul id="progressbar" className='supply-progress'>
+                            </div>
+
+                            {console.log(isRoleDefined)}
+
+                            {isRoleDefined && (
                         
-                            <li className="active">Order</li>
-                            <li className="active">Raw Material Supplier</li>
-                            <li className="active">Manufacturer</li>
-                            <li className="active">Distributor</li>
-                            <li className="active">Retailer</li>
-                            <li className="active">Consumer</li>
-                        </ul>
-                        <table className="table table-stripped text-center table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Medicine ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Current Processing Stage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.keys(MED).map(function (key) {
-                                    return (
-                                        <tr key={key}>
-                                            <td>{MED[key].id}</td>
-                                            <td>{MED[key].name}</td>
-                                            <td>{MED[key].description}</td>
-                                            <td>
-                                                {
-                                                    MedStage[key]
-                                                }
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                        {ROLE[3] === "rawsupplier" && (
-                            <div className='row mt-5'>
-                                <div className='col-md-8 offset-md-2'>
-                                    <div className='card p-4'>
-                                        <h5>Supply Raw Materials</h5>
-                                        <form onSubmit={handlerSubmitRMSsupply}>
-                                            <div className='form-group'>
-                                                <label>Medicine ID</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                            <div className='col-md-4 mt-4'>
+                                {ROLE[3] === "rawsupplier" && (
+                                    <div className='row'>
+                                        <div className='col-12'>
+                                            <div className='card p-4 dark-mode-light-bg'>
+                                                <h5 className='dark-mode-text'>Supply Raw Materials</h5>
+                                                <form onSubmit={handlerSubmitRMSsupply}>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Medicine ID</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <button className="custom-btn dark-mode-btn btn-md" >Supply</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div className='form-group'>
-                                                <button className="btn btn-outline-success" >Supply</button>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        )}
-                        {console.log(ROLE[3])}
-                        <br />
-                        {ROLE[3] === "manufacturer" && (
-                            <div className='row'>
-                                <div className='col-sm-6 offset-md-3'>
-                                    <div className='card p-4'>
-                                        <h5>Manufacture</h5>
-                                        <form onSubmit={handlerSubmitManufacturing}>
-                                            <div className='form-group'>
-                                                <label>Medicine ID</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
-                                            </div>
-                                            <div className='form-group'>
-                                                <button className="btn btn-outline-success" onSubmit={handlerSubmitManufacturing}>Manufacture</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                                )}
 
-                        <br />
-                        {ROLE[3] === "distributor" && (
-                            <div className='row'>
-                                <div className='col-sm-6 offset-md-3'>
-                                    <div className='card p-4'>
-                                        <h5>Distribute</h5>
-                                        <form onSubmit={handlerSubmitDistribute}>
-                                            <div className='form-group'>
-                                                <label>Medicine ID</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+
+                                {ROLE[3] === "manufacturer" && (
+                                    <div className='row'>
+                                        <div className='col-12'>
+                                            <div className='card p-4 dark-mode-light-bg'>
+                                                <h5 className='dark-mode-text'>Manufacture</h5>
+                                                <form onSubmit={handlerSubmitManufacturing}>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Medicine ID</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <button className="custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitManufacturing}>Manufacture</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div className='form-group'>
-                                                <button className="btn btn-outline-success" onSubmit={handlerSubmitDistribute}>Distribute</button>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
+
+
+                                {ROLE[3] === "distributor" && (
+                                    <div className='row'>
+                                        <div className='col-12'>
+                                            <div className='card p-4 dark-mode-light-bg'>
+                                                <h5 className='dark-mode-text'>Distribute</h5>
+                                                <form onSubmit={handlerSubmitDistribute}>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Medicine ID</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <button className="custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitDistribute}>Distribute</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {ROLE[3] === "retailer" && (
+                                    <div className='row'>
+                                        <div className='col-12'>
+                                            <div className='card p-4 dark-mode-light-bg'>
+                                                <h5 className='dark-mode-text'>Retail</h5>
+                                                <form onSubmit={handlerSubmitRetail}>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Medicine ID</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <button className="custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitRetail}>Retail</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div className='col-12 mt-3'>
+                                            <div className='card p-4 dark-mode-light-bg'>
+                                                <h5 className='dark-mode-text'>Mark as sold</h5>
+                                                <form onSubmit={handlerSubmitSold} >
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Medicine ID</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Consumer Name</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeConsumerName} placeholder="Consumer Name" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label className='dark-mode-text'>Consumer Phone</label>
+                                                        <input className="form-control" type="text" onChange={handlerChangeConsumerPhone} placeholder="Consumer Phone" required />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <button className="custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitSold}>Sold</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                        )}
-                        <br />
-                        {ROLE[3] === "retailer" && (
-                            <div className='row'>
-                                <div className='col-sm-6'>
-                                    <div className='card p-4'>
-                                        <h5>Retail</h5>
-                                        <form onSubmit={handlerSubmitRetail}>
-                                            <div className='form-group'>
-                                                <label>Medicine ID</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
-                                            </div>
-                                            <div className='form-group'>
-                                                <button className="btn btn-outline-success" onSubmit={handlerSubmitRetail}>Retail</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div className='col-sm-6'>
-                                    <div className='card p-4'>
-                                        <h5>Mark as sold</h5>
-                                        <form onSubmit={handlerSubmitSold}>
-                                            <div className='form-group'>
-                                                <label>Medicine ID</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeID} placeholder="Enter Medicine ID" required />
-                                            </div>
-                                            <div className='form-group'>
-                                                <label>Consumer Name</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeConsumerName} placeholder="Consumer Name" required />
-                                            </div>
-                                            <div className='form-group'>
-                                                <label>Consumer Phone</label>
-                                                <input className="form-control" type="text" onChange={handlerChangeConsumerPhone} placeholder="Consumer Phone" required />
-                                            </div>
-                                            <div className='form-group'>
-                                                <button className="btn btn-outline-success" onSubmit={handlerSubmitSold}>Sold</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                            )}
+
+                        </div>
+
+
                     </div>
                 </div>
             </div>

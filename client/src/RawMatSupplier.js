@@ -116,33 +116,33 @@ function RawMatSupplier() {
 
 
     return (
-        <div>
+        <div className='dark-mode-deep-bg vh-100'>
             <div className="container">
                 <div className="row text-center">
                     <div className="col-12">
-                        <div className="card p-4 my-4">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">Back</span>
+                                    <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">Back</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
+                                    <b className='align-self-center dark-mode-text'> Account: </b>
                                     <input
-                                        className='form-control'
+                                        className='form-control mx-2'
                                         type="text"
                                         value={currentaccount}
                                         readOnly
                                         ref={inputRef}
                                     />
-                                     <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                     <button onClick={copyToClipboard} className='custom-btn dark-mode-btn'>Copy</button>
                                 </div>
 
                             </div>
                         </div>
 
 
-                        <form onSubmit={handlerSubmitRMS} className='card p-4'>
-                            <h4 className='mb-4'>Raw Material Suppliers</h4>
+                        <form onSubmit={handlerSubmitRMS} className='card p-4 dark-mode-light-bg'>
+                            <h4 className='mb-4 dark-mode-text'>Raw Material Suppliers</h4>
                             <div className='row'>
                                 <div className='col-md-6 form-group'>
                                     <input className="form-control" type="text" onChange={handlerChangeAddressRMS} placeholder="Ethereum Address" required />
@@ -160,14 +160,14 @@ function RawMatSupplier() {
                                     <input className="form-control" type="hidden" onChange={handlerChangeRoleRMS} value="rawsupplier" required />
                                 </div>
                                 <div className='col-12'>
-                                    <button className="btn btn-outline-success btn-md" onSubmit={handlerSubmitRMS}>Register</button>
+                                    <button className="custom-btn dark-mode-btn btn btn-md" onSubmit={handlerSubmitRMS}>Register</button>
                                 </div>
                             </div>
                         </form>
                         <div className="row mt-3">
                             <div className="col-12">
-                                <div className="card p-4">
-                                    <table className="table table table-striped">
+                                <div className="card p-4 dark-mode-light-bg ">
+                                    <table className="table table table-striped dark-mode-text">
                                         <thead>
                                             <tr>
                                                 <th scope="col">ID</th>

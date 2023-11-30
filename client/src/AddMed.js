@@ -97,77 +97,73 @@ function AddMed() {
         }
     }
     return (
-        <div>
-            <div className='container'>
-                <div className="row">
-                    <div className="col-sm-12">
-                    </div>
-                </div>
-            </div>
-            <div className='container mt-5'>
+        <div className='dark-mode-deep-bg'>
+            <div className='container pt-5'>
                 <div className="row text-center">
                     <div className="col-sm-12">
-                        <div className="card p-4 my-4">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
+                                    <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">HOME</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
+                                    <b className='dark-mode-text align-self-center'> Account: </b>
                                     <input
-                                        className='form-control'
+                                        className='form-control mx-2'
                                         type="text"
                                         value={currentaccount}
                                         readOnly
                                         ref={inputRef}
                                     />
-                                    <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                    <button onClick={copyToClipboard} className='custom-btn dark-mode-btn btn-md'>Copy</button>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="card p-4 my-4">
-                            <h4>Add Medicine Order:</h4>
+                        <div className="card p-4 my-4 dark-mode-light-bg">
+                            <h4 className='dark-mode-text'>Add Medicine Order:</h4>
                             <form onSubmit={handlerSubmitMED} className='text-left'>
                                 <div className="mb-3">
-                                    <label for="exampleFormControlInput1" className="form-label">Medicine Name</label>
+                                    <label for="exampleFormControlInput1" className="form-label dark-mode-text">Medicine Name</label>
                                     <input type="text" onChange={handlerChangeNameMED} className="form-control" id="exampleFormControlInput1" placeholder="Napa Extra" />
                                 </div>
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label">Medicine Description</label>
+                                    <label for="exampleFormControlTextarea1" className="form-label dark-mode-text">Medicine Description</label>
                                     <textarea className="form-control" onChange={handlerChangeDesMED} id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
-                                <button className="btn btn-outline-success btn-md" onSubmit={handlerSubmitMED}>Order</button>
+                                <button className="btn custom-btn dark-mode-btn btn-md" onSubmit={handlerSubmitMED}>Order</button>
                             </form>
                         </div>
-                        <br />
-                        <h5>Ordered Medicines:</h5>
-                        <table className="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Current Stage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.keys(MED).map(function (key) {
-                                    return (
-                                        <tr key={key}>
-                                            <td>{MED[key].id}</td>
-                                            <td>{MED[key].name}</td>
-                                            <td>{MED[key].description}</td>
-                                            <td>
-                                                {
-                                                    MedStage[key]
-                                                }
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
+                        <div className="card p-4 my-4 dark-mode-light-bg">
+                            <h5 className='dark-mode-text mb-4'>Ordered Medicines:</h5>
+                            <table className="table table-striped dark-mode-text">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Current Stage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(MED).map(function (key) {
+                                        return (
+                                            <tr key={key}>
+                                                <td>{MED[key].id}</td>
+                                                <td>{MED[key].name}</td>
+                                                <td>{MED[key].description}</td>
+                                                <td>
+                                                    {
+                                                        MedStage[key]
+                                                    }
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

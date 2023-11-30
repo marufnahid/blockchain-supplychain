@@ -211,26 +211,26 @@ function AssignRoles() {
 
 
     return (
-        <div>
-            <div className="container">
+        <div className='dark-mode-deep-bg pb-5'>
+            <div className="container d">
                 <div className='row'>
                     <div className='col-12'>
 
-                        <div className="card p-4 my-4">
+                        <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="btn btn-outline-danger btn-sm">HOME</span>
+                                    <span onClick={redirect_to_back} className="custom-btn dark-mode-btn btn-md">HOME</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
-                                    <b> Account: </b>
+                                    <b className='dark-mode-text align-self-center'> Account: </b>
                                     <input
-                                        className='form-control'
+                                        className='form-control mx-2'
                                         type="text"
                                         value={currentaccount}
                                         readOnly
                                         ref={inputRef}
                                     />
-                                    <button onClick={copyToClipboard} className='btn btn-sm btn-secondary'>Copy</button>
+                                    <button onClick={copyToClipboard} className='custom-btn dark-mode-btn btn-md'>Copy</button>
                                 </div>
 
                             </div>
@@ -240,34 +240,34 @@ function AssignRoles() {
 
                 <div className="row m-5 text-center">
                     <div className="col ">
-                        <h1>Register Roles</h1>
+                        <h1 className='dark-mode-text'>Register Roles</h1>
                     </div>
                 </div>
                 <div className="row my-5">
                     <div className="col-md-6">
-                        <div className="card p-4 box-shadow card-wrap">
+                        <div className="card p-4 box-shadow card-wrap dark-mode-light-bg">
                             <img src='./images/raw.png' />
-                            <button onClick={redirect_to_raw_mat_supplier} className="btn btn-outline-primary btn-md home-button ">Raw Meterial Supplier</button>
+                            <button onClick={redirect_to_raw_mat_supplier} className="custom-btn dark-mode-btn btn-md home-button ">Raw Meterial Supplier</button>
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="card p-4 box-shadow card-wrap">
+                        <div className="card p-4 box-shadow card-wrap dark-mode-light-bg">
                             <img src='./images/manufacturer.png' />
-                            <button onClick={redirect_to_manufacturer} className="btn btn-outline-primary btn-md home-button ">Manufacturer</button>
+                            <button onClick={redirect_to_manufacturer} className="custom-btn dark-mode-btn btn-md home-button ">Manufacturer</button>
                         </div>
                     </div>
                 </div>
                 <div className="row my-5">
                     <div className="col-md-6">
-                        <div className="card p-4 box-shadow card-wrap">
+                        <div className="card p-4 box-shadow card-wrap dark-mode-light-bg">
                             <img src='./images/distributor.png' />
-                            <button onClick={redirect_to_distributor} className="btn btn-outline-primary btn-md home-button ">Distributor</button>
+                            <button onClick={redirect_to_distributor} className="custom-btn dark-mode-btn btn-md home-button ">Distributor</button>
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="card p-4 box-shadow card-wrap">
+                        <div className="card p-4 box-shadow card-wrap dark-mode-light-bg">
                             <img src='./images/retailer.png' />
-                            <button onClick={redirect_to_retailer} className="btn btn-outline-primary btn-md home-button ">Retailer</button>
+                            <button onClick={redirect_to_retailer} className="custom-btn dark-mode-btn btn-md home-button ">Retailer</button>
                         </div>
                     </div>
                 </div>
