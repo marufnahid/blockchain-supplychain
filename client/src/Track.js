@@ -627,7 +627,7 @@ function Track() {
         setID(event.target.value);
     }
     const redirect_to_home = () => {
-        history.push('/')
+        history.push('/home')
     }
     const handlerSubmit = async (event) => {
         event.preventDefault();
@@ -708,7 +708,7 @@ function Track() {
                         <div className="card p-4 my-4 dark-mode-light-bg">
                             <div className='d-flex justify-content-between'>
                                 <div>
-                                    <span onClick={redirect_to_back} className="dark-mode-btn custom-btn btn-md">HOME</span>
+                                    <span onClick={redirect_to_home} className="dark-mode-btn custom-btn btn-md">HOME</span>
                                 </div>
                                 <div className='d-flex align-items-center'>
                                     <b className='align-self-center dark-mode-text'> Account: </b>

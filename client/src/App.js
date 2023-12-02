@@ -10,6 +10,7 @@ import Distributor from './Distributor'
 import Retailer from './Retailer'
 import ConsumerTrack from './ConsumerTrack'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Landing from './landing';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
       
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Landing} />
+          <Route path="/home" exact component={Home} />
           <Route path="/roles" component={AssignRoles} />
           <Route path="/raw-materials" component={RawMatSupplier} />
           <Route path="/manufacturer" component={Manufacturer} />

@@ -121,7 +121,7 @@ function AssignRoles() {
 
     }
     const redirect_to_home = () => {
-        history.push('/')
+        history.push('/home')
     }
     const handlerChangeAddressRMS = (event) => {
         setRMSaddress(event.target.value);
@@ -247,7 +247,7 @@ function AssignRoles() {
                     <div className="col-md-6">
                         <div className="card p-4 box-shadow card-wrap dark-mode-light-bg">
                             <img src='./images/raw.png' />
-                            <button onClick={redirect_to_raw_mat_supplier} className="custom-btn dark-mode-btn btn-md home-button ">Raw Meterial Supplier</button>
+                            <button onClick={redirect_to_raw_mat_supplier} className="custom-btn dark-mode-btn btn-md home-button ">Raw Material Supplier</button>
                         </div>
                     </div>
                     <div className="col-md-6">

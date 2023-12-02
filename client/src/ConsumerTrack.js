@@ -566,7 +566,7 @@ function ConsumerTrack() {
         setID(event.target.value);
     }
     const redirect_to_home = () => {
-        history.push('/')
+        history.push('/home')
     }
     const handlerSubmit = async (event) => {
         event.preventDefault();
